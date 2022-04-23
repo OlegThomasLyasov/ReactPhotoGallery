@@ -1,2 +1,2 @@
 # ReactPhotoGallery
-Исходный код 
+Фотогалерея с использованием React, NodeJs
