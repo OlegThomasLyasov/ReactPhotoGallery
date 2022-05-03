@@ -10,22 +10,16 @@ import Pages from "../components/Pages";
 const Photogallery =()=>{
 
     const {photo} = useContext(Context)
+    const {user} = useContext(Context)
 
     useEffect(() => {
         fetchTypes().then(data => photo.setTypes(data))
+        console.log(user)
         fetchPhotos(null, null, 1, 8).then(data => {
             photo.setPhotos(data.rows)
             photo.setTotalCount(data.count)
         })
-    },[])
-
-    useEffect(() => {
-        fetchPhotos(photo._selectedType.id, photo._page, 8).then(data => {
-            //console.log(data.count)
-            photo.setPhotos(data.rows)
-            photo.setTotalCount(data.count)
-        })
-    },[photo._selectedType, photo._page])
+    },[user._isAuth])
     
     return (
        <Container>

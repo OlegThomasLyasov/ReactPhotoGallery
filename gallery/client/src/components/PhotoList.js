@@ -5,6 +5,7 @@ import {Row} from "react-bootstrap";
 import PhotoItem from './PhotoItem';
 
 const PhotoList = observer(() => {
+    
     const {photo} = useContext(Context)
 
     return (

@@ -4,8 +4,6 @@ import {Button, Dropdown, Form, Row, Col} from "react-bootstrap";
 import {Context} from "../index";
 import {createPhoto} from "../http/photoAPI";
 import {observer} from "mobx-react-lite";
-import { ADMIN_ROUTE, PHOTOGALLERY_ROUTE } from '../utils/consts';
-import { useHistory } from 'react-router-dom';
 
 const CreatePhoto = observer(({show, onHide}) => {
     
@@ -13,20 +11,37 @@ const CreatePhoto = observer(({show, onHide}) => {
     const [file, setFile] = useState(null)
     const [info, setInfo] = useState([])
     const {user} = useContext(Context)
+    
 
     const selectFile = e => {
         setFile(e.target.files[0])
     }
+    
+    function getRandomInt(min,max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+      }
 
     const addPhoto = () => {
         const formData = new FormData()
         formData.append('name', name)
         formData.append('img', file)
-        formData.append('typeId', 4)
+        formData.append('typeId', 2)
         formData.append('userId', user._user.id)
         formData.append('textPhoto', info)
         createPhoto(formData).finally(data => onHide())
-        //console.log(info)
+
+        /* const formDataSpec = new FormData()
+        formDataSpec.append('name', name)
+        formDataSpec.append('img', file)
+        let rand = getRandomInt(3,6)
+        console.log(rand)
+        formDataSpec.append('typeId', rand)
+        formDataSpec.append('userId', user._user.id)
+        formDataSpec.append('textPhoto', info)
+        createPhoto(formDataSpec).finally(data => onHide()) */
+
         alert(`Фото ${name} успешно добавлено!`)
         onHide()
     }

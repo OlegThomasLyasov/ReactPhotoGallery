@@ -16,10 +16,11 @@ export const createPhoto = async (Photo) => {
     return data
 }
 
-export const fetchPhotos = async (typeId, page, limit= 5) => {
+export const fetchPhotos = async (typeId,userId, page, limit= 5) => {
     const {data} = await $host.get('api/photo', {params: {
-            typeId, page, limit
+            typeId, userId, page, limit
         }})
+    //console.log(userId)
     return data
 }
 

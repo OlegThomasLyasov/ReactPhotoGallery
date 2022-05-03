@@ -9,24 +9,25 @@ const PhotoPage = () => {
 
     const [Photo, setPhoto] = useState({info: []})
     const {user} = useContext(Context)
+    const [User, setUser] = useState('')
+
     const {id} = useParams()
 
-
     useEffect(() => {
+        
         fetchOnePhoto(id).then(data => setPhoto(data))
     }, [])
 
-    const [User, setUser] = useState('')
+    
 
     useEffect(() => {
         //fetchOnePhoto(id).then(data => setPhoto(data))
         if (Photo.userId!=undefined || Photo.userId!=null){
                 getOne(Photo.userId).then(data => setUser(data))
                }
-       }, [Photo.userId])
+    }, [])
 
-    //console.log(Photo)
-    //console.log(process.env.REACT_APP_API_URL)
+
     return (
         <Container className="mt-5">
             <Row >
@@ -40,8 +41,8 @@ const PhotoPage = () => {
                     </Row>
                     
                 <Row >
-                    <h4 className='mt-4'>Описание фотографии</h4>
-                    {Photo.textPhoto}
+                    <h4 className='d-flex flex-column align-items-center mt-4'>Описание фотографии</h4>
+                    <div>{Photo.textPhoto}</div>
                 </Row>
                 </Col>
             </Row>

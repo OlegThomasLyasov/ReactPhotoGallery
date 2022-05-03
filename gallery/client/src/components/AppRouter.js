@@ -1,6 +1,6 @@
 import React, { useContext }  from "react";
-import {Switch, Route, Redirect} from "react-router-dom"
-import Photogallery from "../pages/photoGallery";
+import {Switch, Route} from "react-router-dom"
+
 import {authRouters, publicRoutes } from "../routes";
 import { Context } from "../index";
 

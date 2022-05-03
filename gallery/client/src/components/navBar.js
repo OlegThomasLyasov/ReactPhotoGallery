@@ -35,13 +35,15 @@ const NavBar = observer(() => {
 
                 {user._isAuth ?
                     <Nav  style={{color: 'white'}}>
-                        <Button
+                        <Button 
+                            size="sm"
                             variant={"outline-light"}
                             onClick={() => history.push(ADMIN_ROUTE)}
                         >
                            Пользователь {user._user.email}
                         </Button>
-                        <Button
+                        <Button 
+                            size="sm"
                             variant={"outline-light"}
                             onClick={() => logOut()}
                             
