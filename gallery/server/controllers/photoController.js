@@ -15,7 +15,7 @@ class PhotoController{
         const {userId} = req.body
         const {typeId} = req.body
         const {textPhoto} = req.body
-        console.log(textPhoto)
+
         let fileName = uuid.v4()+ ".jpg"
         img.mv(path.resolve(__dirname,'..','static',fileName))
 
@@ -32,17 +32,25 @@ class PhotoController{
     }
 
     async getAll(req,res){
-        let {typeId, limit, page} = req.query
+        let {typeId,userId, limit, page} = req.query
         page = page || 1
         limit = limit || 8
         let offset = page * limit - limit
         let photos;
         //console.log(typeId)
-        if (!typeId) {
+        if (!typeId && !userId) {
             photos= await Photo.findAndCountAll({limit, offset})
         }
-        if (typeId) {
+        if (typeId && !userId) {
             photos = await Photo.findAndCountAll({where:{typeId}, limit, offset})
+        }
+        if (!typeId && userId) {
+            photos = await Photo.findAndCountAll({ limit, offset})
+        }
+        if (typeId==2 && userId) {
+            //console.log(userId)
+            photos = await Photo.findAndCountAll({where:{typeId,userId}, limit, offset})
+            
         }
         return res.json(photos)
     }

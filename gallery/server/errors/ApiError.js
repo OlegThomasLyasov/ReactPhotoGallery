@@ -6,6 +6,7 @@ class ApiError extends Error{
     }
 
     static badRequest (message){
+        //console.log('Аккаунт не существует!')
         return new ApiError (404, message)
     }
 

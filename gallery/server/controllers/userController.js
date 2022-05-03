@@ -37,11 +37,12 @@ class UserController{
     }
 
     async login (req,res,next){
-
+         
         const {email,password} = req.body
         const cond = await User.findOne({where: {email}})
-
+        
         if (!cond){
+            //console.log("Данный аккаунт не зарегистрирован!")
             return next(ApiError.badRequest("Данный аккаунт не зарегистрирован"))
         }
 
